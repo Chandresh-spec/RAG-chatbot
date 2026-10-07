@@ -1,0 +1,62 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    
+    container_name: rate_limiter_backend
+    ports:
+      - "8000:8000"
+    
+    env_file:
+       ./backend/.env
+      
+    environment:
+        - sync_database_url="postgresql+psycopg2://postgres:password@postgresql:5432/ratelimiter"
+        - async_database_url="postgresql+asyncpg://postgre:password@postgresql:5432/ratelimiter"
+        - redis_url="redis://redis:6379/0"
+
+  
+  redis:
+     image: redis:7-alpine
+     container_name: redis_container
+     ports:
+       - "6379:6379"
+  
+
+  postgresql:
+      image: postgres:17
+
+      container_name: postresql_container
+
+      environment:
+         POSTGRE_USERNAME: postgre
+         POSTGRE_PASSWORD: password
+         POSTGRE_DB: rate_limiter
+      
+      ports:
+        - "5432:5432"
+      
+      volumes:
+        -  postgres_data:/var/lib/postgresql/data
+      
+      healthcheck:
+        test: ["CMD-SHELL","pg_ready -U postresql -d rate_limiter"]
+        interval: 5s
+        timeout: 5s
+        retries: 5
+
+      
+
+volumes:
+  postgres_data:
+
+
+
+
+
+
+
+    
+
+   
