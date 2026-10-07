@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+sqlalchmey
+alembic
+psycopg
+asyncpg
+pydantic_settings
+sqlalchemy[asyncio] 
