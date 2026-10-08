@@ -12,8 +12,8 @@ services:
        ./backend/.env
       
     environment:
-        - sync_database_url="postgresql+psycopg2://postgres:password@postgresql:5432/ratelimiter"
-        - async_database_url="postgresql+asyncpg://postgre:password@postgresql:5432/ratelimiter"
+        - sync_database_url=postgresql+psycopg://myapp:password@postgresql:5432/rate_limiter
+        - async_database_url=postgresql+asyncpg://myapp:password@postgresql:5432/rate_limiter
         - redis_url="redis://redis:6379/0"
 
   
@@ -30,9 +30,9 @@ services:
       container_name: postresql_container
 
       environment:
-         POSTGRE_USERNAME: postgre
-         POSTGRE_PASSWORD: password
-         POSTGRE_DB: rate_limiter
+         POSTGRES_USER: myapp
+         POSTGRES_PASSWORD: password
+         POSTGRES_DB: rate_limiter
       
       ports:
         - "5432:5432"

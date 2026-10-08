@@ -1,8 +1,8 @@
 fastapi
 uvicorn
-sqlalchmey
+sqlalchemy
 alembic
-psycopg
+psycopg2-binary
 asyncpg
 pydantic_settings
-sqlalchemy[asyncio] 
+sqlalchemy[asyncio]
